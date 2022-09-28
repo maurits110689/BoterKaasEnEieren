@@ -15,8 +15,9 @@ def draw_board(board: Board):
 
 
 def draw_start():
-    print('Boter Kaas en Eieren')
-    print('====================')
+    print('Welkom bij Boter Kaas & Eieren....')
+    print()
+    print('Laten we beginnen!')
     print()
 
 
@@ -42,12 +43,14 @@ def get_player_move(board: Board, player_symbol: Symbol) -> int:
         0 1 2
         3 4 5
         6 7 8    
+        
         Plaats een {player_symbol} op een vrij vlak, kies een getal:
         """).strip()
     print(msg)
     move = input()
     while move not in [str(x) for x in range(9)]:
-        print('Kies een getal 0 t/m 8')
+        print()
+        print('Kies een getal 0 t/m 8....')
         move = input()
     return int(move)
 

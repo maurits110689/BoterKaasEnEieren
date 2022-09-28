@@ -13,4 +13,4 @@ class MyAgent(MLAgent):
     
  
 my_agent = MyAgent()
-start(player_x=my_agent,player_o=my_agent)
+start(player_o=my_agent)
