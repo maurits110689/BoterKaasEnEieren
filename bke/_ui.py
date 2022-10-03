@@ -15,7 +15,6 @@ def draw_board(board: Board):
 
 
 def draw_start():
-    print('Welkom bij Boter Kaas & Eieren....')
     print()
     print('Laten we beginnen!')
     print()

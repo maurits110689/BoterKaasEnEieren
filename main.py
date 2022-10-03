@@ -15,7 +15,8 @@ class MyAgent(MLAgent):
 
 def main ():
   print()
-  print("Kies je spel")
+  print('Welkom bij Boter Kaas & Eieren 2.0....')
+  print("Kies je spel!")
   choice = input("""
                     A: Tegen een andere speler
                     B: Makkelijk spel
