@@ -18,6 +18,7 @@ random.seed(1)
  
 my_agent = MyAgent()
 random_agent = RandomAgent()
+my_agent = MyAgent(alpha=0.8, epsilon=0.2)
  
 train_and_plot(
     agent=my_agent,
