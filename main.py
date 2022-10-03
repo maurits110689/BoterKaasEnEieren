@@ -1,8 +1,7 @@
 import random
 
-from bke import start, load, MLAgent, is_winner, opponent, train, save, RandomAgent, plot_validation, validate, train_and_plot
- 
- # het trainen van de agent
+from bke import start, load, MLAgent, is_winner, opponent, train, save, RandomAgent, train_and_plot
+
 class MyAgent(MLAgent):
     def evaluate(self, board):
         if is_winner(board, self.symbol):
@@ -13,19 +12,6 @@ class MyAgent(MLAgent):
             reward = 0
         return reward
    
- 
-random.seed(1)
- 
-my_agent = MyAgent()
-random_agent = RandomAgent()
-my_agent = MyAgent(alpha=0.8, epsilon=0.2)
- 
-train_and_plot(
-    agent=my_agent,
-    validation_agent=random_agent,
-    iterations=50,
-    trainings=100,
-    validations=1000)
 
 def main ():
   print("Kies je spel")
@@ -65,11 +51,19 @@ def AnderSpeler():
   start()
 
 def Grafiek(): 
- validation_agent = RandomAgent()
+ random.seed(1)
  
- validation_result = validate(agent_x=my_agent, agent_o=validation_agent, iterations=100)
+ my_agent = MyAgent()
+ random_agent = RandomAgent()
+ my_agent = MyAgent(alpha=0.8, epsilon=0.2)
  
- plot_validation(validation_result)
+ train_and_plot(
+    agent=my_agent,
+    validation_agent=random_agent,
+    iterations=50,
+    trainings=100,
+    validations=1000)
+
 def TrainOnly():
   my_agent = MyAgent()
  
@@ -84,17 +78,7 @@ def MoeilijkSpel():
  
   start(player_x=my_agent)
 
+main()
 
-
-
-# #Het valideren, het plotten van een grafiek
-# winners = defaultdict(int)  # Dit is een mapje waar in het begin altijd nullen in zitten.
-# validation_agent = RandomAgent()
-# for i in range(100):
-#     winner = start(player_x=my_agent, player_o=validation_agent, ui=HEADLESS)
-#     winners[winner] += 1
-# winners[PLAYER_X] = winners[PLAYER_X] / 100
-# winners[PLAYER_O] = winners[PLAYER_O] / 100
-# winners[None] = winners[None] / 100
-
-  
+# opnieuw beginnen werkt niet?
+# E: train de tegenstander werkt ook niet
