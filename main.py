@@ -14,11 +14,10 @@ class MyAgent(MLAgent):
    
 
 def main ():
-  print("Kies je spel")
   print()
-
+  print("Kies je spel")
   choice = input("""
-                    A: Tegen een ander speler
+                    A: Tegen een andere speler
                     B: Makkelijk spel
                     C: Moeilijk spel
                     D: Plot de grafiek
@@ -70,6 +69,7 @@ def TrainOnly():
   train(my_agent, 3000)
  
   save(my_agent, 'MyAgent_3000')
+  start(player_x=my_agent)
 
 def MoeilijkSpel():
   my_agent = load('MyAgent_3000')
