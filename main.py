@@ -1,4 +1,6 @@
-from bke import MLAgent, is_winner, opponent, train, save
+import random
+
+from bke import start, load, MLAgent, is_winner, opponent, train, save, RandomAgent, plot_validation, validate, train_and_plot
  
  # het trainen van de agent
 class MyAgent(MLAgent):
@@ -12,47 +14,18 @@ class MyAgent(MLAgent):
         return reward
    
  
-my_agent = MyAgent()
- 
-train(my_agent, 3000)
- 
-save(my_agent, 'MyAgent_3000')
-
-
-# wanneer de agent al getraind is
-class MyAgent(MLAgent):
-    def evaluate(self, board):
-        if is_winner(board, self.symbol):
-            reward = 1
-        elif is_winner(board, opponent[self.symbol]):
-            reward = -1
-        else:
-            reward = 0
-        return reward
-   
+random.seed(1)
  
 my_agent = MyAgent()
-my_agent = load('MyAgent_3000')
+random_agent = RandomAgent()
  
-my_agent.learning = False
- 
-start(player_x=my_agent)
+train_and_plot(
+    agent=my_agent,
+    validation_agent=random_agent,
+    iterations=50,
+    trainings=100,
+    validations=1000)
 
-
-
-
-#Het valideren, het plotten van een grafiek
-winners = defaultdict(int)  # Dit is een mapje waar in het begin altijd nullen in zitten.
-validation_agent = RandomAgent()
-for i in range(100):
-    winner = start(player_x=my_agent, player_o=validation_agent, ui=HEADLESS)
-    winners[winner] += 1
-winners[PLAYER_X] = winners[PLAYER_X] / 100
-winners[PLAYER_O] = winners[PLAYER_O] / 100
-winners[None] = winners[None] / 100
-
-
-# wat het menu moet zijn
 def main ():
   print("Kies je spel")
   print()
@@ -71,7 +44,7 @@ def main ():
   elif choice == "B" or choice == "b":
     MakkelijkSpel()
   elif choice == "C" or choice == "c":
-    MoelijkSpel()
+    MoeilijkSpel()
   elif choice == "D" or choice == "d":
     Grafiek()
   elif choice == "E" or choice == "e":
@@ -85,13 +58,42 @@ def main ():
 # de functies van de soorten spel
 def MakkelijkSpel():
    random_agent = RandomAgent()
+   start(player_o=random_agent)
 
 def AnderSpeler():
-  winner=start()
-  if main():
+  start()
 
-def Grafiek():
-
+def Grafiek(): 
+ validation_agent = RandomAgent()
+ 
+ validation_result = validate(agent_x=my_agent, agent_o=validation_agent, iterations=100)
+ 
+ plot_validation(validation_result)
 def TrainOnly():
+  my_agent = MyAgent()
+ 
+  train(my_agent, 3000)
+ 
+  save(my_agent, 'MyAgent_3000')
 
 def MoeilijkSpel():
+  my_agent = load('MyAgent_3000')
+ 
+  my_agent.learning = False
+ 
+  start(player_x=my_agent)
+
+
+
+
+# #Het valideren, het plotten van een grafiek
+# winners = defaultdict(int)  # Dit is een mapje waar in het begin altijd nullen in zitten.
+# validation_agent = RandomAgent()
+# for i in range(100):
+#     winner = start(player_x=my_agent, player_o=validation_agent, ui=HEADLESS)
+#     winners[winner] += 1
+# winners[PLAYER_X] = winners[PLAYER_X] / 100
+# winners[PLAYER_O] = winners[PLAYER_O] / 100
+# winners[None] = winners[None] / 100
+
+  
