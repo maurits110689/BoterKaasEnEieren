@@ -73,7 +73,9 @@ def Grafiek():
  my_agent = MyAgent()
  random_agent = RandomAgent()
  my_agent = MyAgent(alpha=0.8, epsilon=0.2)
- 
+ print('De grafiek wordt nu gemaakt, bedankt voor het spelen!') 
+ print() 
+  
  train_and_plot(
     agent=my_agent,
     validation_agent=random_agent,
@@ -89,11 +91,11 @@ def TrainOnly():
   save(my_agent, 'MyAgent_3000')
   print()
   print("Gelukt, je hebt je tegenstander getraint.")
+  print("Je kunt nu tegen hem spelen en kijken of je wint.......")
   again()
 
 def MoeilijkSpel():
   my_agent = load('MyAgent_3000')
- 
   my_agent.learning = False
  
   start(player_x=my_agent)
