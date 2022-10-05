@@ -18,39 +18,56 @@ def main ():
   print('Welkom bij Boter Kaas & Eieren 2.0....')
   print("Kies je spel!")
   choice = input("""
-                    A: Tegen een andere speler
-                    B: Makkelijk spel
-                    C: Moeilijk spel
-                    D: Plot de grafiek
-                    E: Train de tegenstander
+                    A: Train de tegenstander 
+                    B: Tegen een andere speler
+                    C: Makkelijk spel
+                    D: Moeilijk spel
+                    E: Plot de grafiek
                    
                    
                     Maak een keuze: """)
   if choice == "A" or choice == "a":
-    AnderSpeler()
-  elif choice == "B" or choice == "b":
-    MakkelijkSpel()
-  elif choice == "C" or choice == "c":
-    MoeilijkSpel()
-  elif choice == "D" or choice == "d":
-    Grafiek()
-  elif choice == "E" or choice == "e":
     TrainOnly()
+  elif choice == "B" or choice == "b":
+    AnderSpeler() 
+  elif choice == "C" or choice == "c":
+    MakkelijkSpel()
+  elif choice == "D" or choice == "d":
+    MoeilijkSpel()
+  elif choice == "E" or choice == "e":
+    Grafiek()
+
   else:
-    print("kies tussen A, B, C of D")
-    print("probeer opnieuw")
+    print()
+    print("Kies tussen A, B, C of D")
+    print("Probeer opnieuw.....")
     main()
 
 
+def again ():
+  print()
+  again = input("Wil je verder spelen? Ja of Nee? ")
+  if again == "ja" or again == "Ja" or again == "JA":
+        print(" ")
+        main()
+      
+  else:
+       print() 
+       print("Tot ziens! :)")
+       quit()
+      
 # de functies van de soorten spel
 def MakkelijkSpel():
    random_agent = RandomAgent()
    start(player_o=random_agent)
+   again()
 
 def AnderSpeler():
   start()
+  again()
 
 def Grafiek(): 
+ print()
  random.seed(1)
  
  my_agent = MyAgent()
@@ -63,14 +80,16 @@ def Grafiek():
     iterations=50,
     trainings=100,
     validations=1000)
-
+  
 def TrainOnly():
   my_agent = MyAgent()
  
   train(my_agent, 3000)
  
   save(my_agent, 'MyAgent_3000')
-  start(player_x=my_agent)
+  print()
+  print("Gelukt, je hebt je tegenstander getraint.")
+  again()
 
 def MoeilijkSpel():
   my_agent = load('MyAgent_3000')
@@ -78,8 +97,8 @@ def MoeilijkSpel():
   my_agent.learning = False
  
   start(player_x=my_agent)
+  again()
+
 
 main()
 
-# opnieuw beginnen werkt niet?
-# E: train de tegenstander werkt ook niet
